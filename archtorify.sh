@@ -73,20 +73,20 @@ ${reset}\\n\\n"
 
 ## Print a message and exit with (1) when an error occurs
 die() {
-    printf "${red}%s${reset}\\n" "[ERROR] ${@}" >&2
+    printf "%s\\n" "[ERROR] ${@}" >&2
     exit 1
 }
 
 
 ## Print information
 info() {
-    printf "${b}${cyan}%s${reset} ${b}%s${reset}\\n" "::" "${@}"
+    printf "${b}%s ${b}%s\\n" "::" "${@}"
 }
 
 
 ## Print `OK` messages
 msg() {
-    printf "${b}${green}%s${reset} %s\\n\\n" "[OK]" "${@}"
+    printf "${b}%s %s\\n\\n" "[OK]" "${@}"
 }
 
 
