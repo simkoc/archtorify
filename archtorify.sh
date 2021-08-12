@@ -38,15 +38,15 @@ readonly signature="Copyright (C) 2021 Brainfuck"
 readonly git_url="https://github.com/brainfucksec/archtorify"
 
 # set colors for stdout
-export red="$(tput setaf 1)"
-export green="$(tput setaf 2)"
-export yellow="$(tput setaf 3)"
-export blue="$(tput setaf 4)"
-export magenta="$(tput setaf 5)"
-export cyan="$(tput setaf 6)"
-export white="$(tput setaf 7)"
-export b="$(tput bold)"
-export reset="$(tput sgr0)"
+export red=""
+export green=""
+export yellow=""
+export blue=""
+export magenta=""
+export cyan=""
+export white=""
+export b=""
+export reset=""
 
 ## Directories
 #
@@ -58,7 +58,7 @@ readonly backup_dir="/usr/share/archtorify/backups"
 
 ## Show program banner
 banner() {
-printf "${b}${cyan}
+printf "
  _____         _   _           _ ___
 |  _  |___ ___| |_| |_ ___ ___|_|  _|_ _
 |     |  _|  _|   |  _| . |  _| |  _| | |
@@ -67,7 +67,7 @@ printf "${b}${cyan}
 
 =[ Transparent proxy through Tor
 =[ brainfucksec
-${reset}\\n\\n"
+\\n\\n"
 }
 
 
@@ -80,13 +80,13 @@ die() {
 
 ## Print information
 info() {
-    printf "${b}%s ${b}%s\\n" "::" "${@}"
+    printf "%s ${b}%s\\n" "::" "${@}"
 }
 
 
 ## Print `OK` messages
 msg() {
-    printf "${b}%s %s\\n\\n" "[OK]" "${@}"
+    printf "%s %s\\n\\n" "[OK]" "${@}"
 }
 
 
@@ -361,10 +361,10 @@ check_status() {
 
     if curl -s -m 5 --socks5 "${hostport}" --socks5-hostname "${hostport}" -L "${url}" \
         | cat | tac | grep -q 'Congratulations'; then
-        printf "${b}${green}%s${reset} %s\\n\\n" \
+        printf "%s %s\\n\\n" \
                 "[OK]" "Your system is configured to use Tor"
     else
-        printf "${red}%s${reset}\\n\\n" "[!] Your system is not using Tor"
+        printf "%s\\n\\n" "[!] Your system is not using Tor"
         printf "%s\\n" "try another Tor circuit with '${prog_name} --restart'"
         exit 1
     fi
@@ -422,7 +422,7 @@ start() {
     printf "\\n"
     check_status
 
-    printf "\\n${b}${green}%s${reset} %s\\n" \
+    printf "\\n$%s %s\\n" \
             "[OK]" "Transparent Proxy activated, your system is under Tor"
 }
 
@@ -467,7 +467,7 @@ stop() {
         cp "${backup_dir}/tor.service.backup" /usr/lib/systemd/system/tor.service
 
 
-        printf "\\n${b}${green}%s${reset} %s\\n" \
+        printf "\\n%s %s\\n" \
                 "[-]" "Transparent Proxy stopped"
         exit 0
     else
